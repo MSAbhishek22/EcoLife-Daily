@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import { getAnalytics, isSupported } from 'firebase/analytics'
 
@@ -19,14 +19,35 @@ const db = getFirestore(app)
 
 let analytics = null
 ;(async () => {
-  if (await isSupported()) {
-    analytics = getAnalytics(app)
+  try {
+    if (await isSupported()) {
+      analytics = getAnalytics(app)
+    }
+  } catch (e) {
+    // analytics not critical; ignore in unsupported/SSR-like environments
+    console.warn('Analytics unavailable:', e?.message || e)
   }
 })()
 
-export function signInWithGoogle() {
+export async function signInWithGoogle() {
   const provider = new GoogleAuthProvider()
-  return signInWithPopup(auth, provider)
+  provider.setCustomParameters({ prompt: 'select_account' })
+  try {
+    return await signInWithPopup(auth, provider)
+  } catch (err) {
+    // Fallback for environments that block popups (iOS Safari, embedded, strict settings)
+    if (
+      err?.code === 'auth/popup-blocked' ||
+      err?.code === 'auth/popup-closed-by-user' ||
+      err?.code === 'auth/operation-not-supported-in-this-environment'
+    ) {
+      return await signInWithRedirect(auth, provider)
+    }
+    if (err?.code === 'auth/unauthorized-domain') {
+      console.error('Firebase Auth unauthorized domain. Add your Vercel domain to Firebase Console → Authentication → Settings → Authorized domains.')
+    }
+    throw err
+  }
 }
 
 export function logout(){
