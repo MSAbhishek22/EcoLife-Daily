@@ -97,19 +97,19 @@ const FooterNav = () => {
   return (
     <div className="fixed bottom-3 inset-x-0 px-4 z-40 md:hidden">
       <div className="footer-glass max-w-xl mx-auto flex items-center justify-around py-2">
-        <Link to="/" className="flex flex-col items-center text-muted hover:text-primary">
+        <Link to="/" className="flex flex-col items-center text-headings hover:text-primary">
           <Home size={20} />
           <span className="text-[11px] mt-1">Home</span>
         </Link>
-        <Link to="/dashboard" className="flex flex-col items-center text-muted hover:text-primary">
+        <Link to="/dashboard" className="flex flex-col items-center text-headings hover:text-primary">
           <LayoutDashboard size={20} />
           <span className="text-[11px] mt-1">Dashboard</span>
         </Link>
-        <Link to="/tasks" className="flex flex-col items-center text-muted hover:text-primary">
+        <Link to="/tasks" className="flex flex-col items-center text-headings hover:text-primary">
           <Trophy size={20} />
           <span className="text-[11px] mt-1">Tasks</span>
         </Link>
-        <Link to="/profile" className="flex flex-col items-center text-muted hover:text-primary">
+        <Link to="/profile" className="flex flex-col items-center text-headings hover:text-primary">
           <User size={20} />
           <span className="text-[11px] mt-1">Profile</span>
         </Link>

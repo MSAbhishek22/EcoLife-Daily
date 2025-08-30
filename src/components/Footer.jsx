@@ -14,9 +14,9 @@ export default function Footer(){
             <Link to="#" className="hover:text-primary">Privacy Policy</Link>
           </nav>
           <div className="flex items-center gap-3 text-muted">
-            <a href="#" aria-label="Facebook" className="hover:text-primary"><Facebook size={18} /></a>
-            <a href="#" aria-label="Instagram" className="hover:text-primary"><Instagram size={18} /></a>
-            <a href="#" aria-label="Twitter" className="hover:text-primary"><Twitter size={18} /></a>
+            <a href="#" aria-label="Facebook" className="text-headings hover:text-primary"><Facebook size={18} /></a>
+            <a href="#" aria-label="Instagram" className="text-headings hover:text-primary"><Instagram size={18} /></a>
+            <a href="#" aria-label="Twitter" className="text-headings hover:text-primary"><Twitter size={18} /></a>
           </div>
         </div>
       </div>
