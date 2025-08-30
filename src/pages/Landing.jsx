@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
@@ -13,7 +13,11 @@ import {
   WifiOff,
   UtensilsCrossed,
   Flame,
-  ShoppingCart
+  ShoppingCart,
+  Droplet,
+  Recycle,
+  Lightbulb,
+  Sprout
 } from 'lucide-react'
 import EcoAnimation from '../components/EcoAnimation'
 import ImpactVisualizer from '../components/ImpactVisualizer'
@@ -58,6 +62,7 @@ function FutureCard({ icon, title, desc }){
 }
 
 export default function Landing() {
+  const [showDemo, setShowDemo] = useState(false)
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="landing">
       {/* Hero */}
@@ -89,6 +94,7 @@ export default function Landing() {
               Start Your Eco Journey
             </Link>
             <Link to="/dashboard" className="btn outline">View Dashboard</Link>
+            <button onClick={() => setShowDemo(true)} className="btn outline" aria-haspopup="dialog" aria-controls="demo-modal">Watch Demo</button>
           </motion.div>
 
           {/* Trust badges */}
@@ -113,18 +119,50 @@ export default function Landing() {
           <LandingProfilePanel />
         </div>
         <div>
-          <h2 className="text-3xl font-bold text-headings mb-3">Your path to greener living</h2>
-          <p className="text-muted">
-            Build sustainable habits through fun missions, get tailored eco-tips powered by AI, and watch your virtual plant grow as your positive impact increases.
-          </p>
-          <ul className="mt-4 space-y-2 text-muted">
-            <li>• Daily eco-missions to keep momentum</li>
-            <li>• Personalized tips with estimated CO₂, water, and plastic savings</li>
-            <li>• Shareable infographics for tips and news</li>
-            <li>• Track XP, streaks, and badges as you level up</li>
-          </ul>
-          <div className="mt-6">
-            <Link to="/dashboard" className="btn outline">Explore the dashboard</Link>
+          <h2 className="text-3xl font-bold text-headings mb-2" style={{ textWrap: 'balance' }}>Your path to greener living</h2>
+          <p className="text-muted">Build sustainable habits through fun missions, get tailored eco-tips powered by AI, and watch your virtual plant grow as your positive impact increases.</p>
+
+          {/* quick stats */}
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            <div className="glass-card p-2 rounded-xl text-center">
+              <div className="text-xs text-muted">Tips</div>
+              <div className="text-headings font-semibold">120+</div>
+            </div>
+            <div className="glass-card p-2 rounded-xl text-center">
+              <div className="text-xs text-muted">Avg Streak</div>
+              <div className="text-headings font-semibold">7d</div>
+            </div>
+            <div className="glass-card p-2 rounded-xl text-center">
+              <div className="text-xs text-muted">Community</div>
+              <div className="text-headings font-semibold">1.2k+</div>
+            </div>
+          </div>
+
+          {/* features as responsive cards */}
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
+              <Sprout className="text-primary" />
+              <div className="text-sm text-muted"><span className="text-headings font-medium">Daily eco‑missions</span> to keep momentum.</div>
+            </div>
+            <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
+              <Droplet className="text-primary" />
+              <div className="text-sm text-muted">Personalized tips with estimated CO₂, water, and plastic savings.</div>
+            </div>
+            <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
+              <Recycle className="text-primary" />
+              <div className="text-sm text-muted">Shareable infographics for tips and news.</div>
+            </div>
+            <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
+              <Lightbulb className="text-primary" />
+              <div className="text-sm text-muted">Track XP, streaks, and badges as you level up.</div>
+            </div>
+          </div>
+
+          {/* quick actions */}
+          <div className="mt-5 flex flex-wrap gap-2">
+            <Link to="/tasks" className="cta-primary">Start Tracker</Link>
+            <Link to="/news" className="btn outline">View Tips</Link>
+            <button onClick={() => setShowDemo(true)} className="btn outline">Watch Demo</button>
           </div>
         </div>
       </section>
@@ -156,6 +194,33 @@ export default function Landing() {
         <p className="text-muted mb-6">Join thousands of others in the journey towards a greener lifestyle.</p>
         <Link to="/tasks" className="cta-primary inline-flex items-center gap-2">Let’s Get Started</Link>
       </section>
+
+      {/* Demo Modal */}
+      {showDemo && (
+        <div id="demo-modal" role="dialog" aria-modal="true" className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" onClick={() => setShowDemo(false)}>
+          <div className="bg-white rounded-2xl shadow-premium overflow-hidden w-full max-w-3xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-3 border-b">
+              <h3 className="font-semibold text-headings">EcoLife Daily — Demo Walkthrough</h3>
+              <button className="btn outline" onClick={() => setShowDemo(false)} aria-label="Close demo">Close</button>
+            </div>
+            <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
+              <iframe
+                title="EcoLife Daily Demo"
+                width="100%"
+                height="100%"
+                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+                style={{ border: 0 }}
+              />
+            </div>
+            <div className="p-3 text-sm text-muted">
+              Tip: Tap “Start Your Eco Journey” to try the habit tracker and impact visualizer.
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Keyframes for ticker fallback */}
       <style>{`@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}`}</style>
