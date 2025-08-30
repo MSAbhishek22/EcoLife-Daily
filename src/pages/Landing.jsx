@@ -110,59 +110,69 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* About + animation */}
-      <section className="my-12 md:my-14 grid md:grid-cols-2 gap-8 items-start">
-        <div className="space-y-4">
-          <div className="glass-card p-4 md:p-6 rounded-2xl">
-            <EcoAnimation className="w-full h-64 md:h-80" />
-          </div>
-          <LandingProfilePanel />
-        </div>
-        <div>
+      {/* About + animation (hierarchical grid) */}
+      <section className="my-12 md:my-14">
+        <div className="mx-auto max-w-[1100px]">
           <h2 className="text-3xl font-bold text-headings mb-2" style={{ textWrap: 'balance' }}>Your path to greener living</h2>
           <p className="text-muted">Build sustainable habits through fun missions, get tailored eco-tips powered by AI, and watch your virtual plant grow as your positive impact increases.</p>
 
-          {/* quick stats */}
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            <div className="glass-card p-2 rounded-xl text-center">
-              <div className="text-xs text-muted">Tips</div>
-              <div className="text-headings font-semibold">120+</div>
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
+            {/* Card A: Animation */}
+            <div className="md:col-span-5 glass-card p-4 md:p-6 rounded-2xl h-full">
+              <EcoAnimation className="w-full h-64 md:h-[22rem]" />
             </div>
-            <div className="glass-card p-2 rounded-xl text-center">
-              <div className="text-xs text-muted">Avg Streak</div>
-              <div className="text-headings font-semibold">7d</div>
-            </div>
-            <div className="glass-card p-2 rounded-xl text-center">
-              <div className="text-xs text-muted">Community</div>
-              <div className="text-headings font-semibold">1.2k+</div>
-            </div>
-          </div>
 
-          {/* features as responsive cards */}
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
-              <Sprout className="text-primary" />
-              <div className="text-sm text-muted"><span className="text-headings font-medium">Daily eco‑missions</span> to keep momentum.</div>
+            {/* Card B: Feature list */}
+            <div className="md:col-span-7 glass-card p-4 md:p-6 rounded-2xl h-full">
+              <div className="grid grid-cols-1 gap-3">
+                <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
+                  <Sprout className="text-primary" />
+                  <div className="text-sm text-muted"><span className="text-headings font-medium">Daily eco‑missions</span> keep momentum strong.</div>
+                </div>
+                <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
+                  <Droplet className="text-primary" />
+                  <div className="text-sm text-muted">Personalized tips with estimated CO₂, water, and plastic savings.</div>
+                </div>
+                <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
+                  <Recycle className="text-primary" />
+                  <div className="text-sm text-muted">Shareable infographics for tips and news.</div>
+                </div>
+                <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
+                  <Lightbulb className="text-primary" />
+                  <div className="text-sm text-muted">Track XP, streaks, and badges as you level up.</div>
+                </div>
+              </div>
             </div>
-            <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
-              <Droplet className="text-primary" />
-              <div className="text-sm text-muted">Personalized tips with estimated CO₂, water, and plastic savings.</div>
-            </div>
-            <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
-              <Recycle className="text-primary" />
-              <div className="text-sm text-muted">Shareable infographics for tips and news.</div>
-            </div>
-            <div className="glass-card p-3 rounded-2xl flex items-start gap-3">
-              <Lightbulb className="text-primary" />
-              <div className="text-sm text-muted">Track XP, streaks, and badges as you level up.</div>
-            </div>
-          </div>
 
-          {/* quick actions */}
-          <div className="mt-5 flex flex-wrap gap-2">
-            <Link to="/tasks" className="cta-primary">Start Tracker</Link>
-            <Link to="/news" className="btn outline">View Tips</Link>
-            <button onClick={() => setShowDemo(true)} className="btn outline">Watch Demo</button>
+            {/* Card C: Profile panel */}
+            <div className="md:col-span-6 glass-card p-4 md:p-6 rounded-2xl h-full">
+              <LandingProfilePanel />
+            </div>
+
+            {/* Card D: Stats + actions */}
+            <div className="md:col-span-6 glass-card p-4 md:p-6 rounded-2xl h-full flex flex-col">
+              <div className="grid grid-cols-3 gap-2">
+                <div className="glass-card p-2 rounded-xl text-center">
+                  <div className="text-xs text-muted">Tips</div>
+                  <div className="text-headings font-semibold">120+</div>
+                </div>
+                <div className="glass-card p-2 rounded-xl text-center">
+                  <div className="text-xs text-muted">Avg Streak</div>
+                  <div className="text-headings font-semibold">7d</div>
+                </div>
+                <div className="glass-card p-2 rounded-xl text-center">
+                  <div className="text-xs text-muted">Community</div>
+                  <div className="text-headings font-semibold">1.2k+</div>
+                </div>
+              </div>
+
+              
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link to="/tasks" className="cta-primary">Start Tracker</Link>
+                <Link to="/news" className="btn outline">View Tips</Link>
+                <button onClick={() => setShowDemo(true)} className="btn outline">Watch Demo</button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
